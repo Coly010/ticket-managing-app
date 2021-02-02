@@ -1,0 +1,7 @@
+<div class="ticket-grid">
+  <ui-ticket-card
+    *ngFor="let ticket of tickets$ | async; trackBy: trackByTicketId"
+    [ticket]="ticket"
+    [user]="{}"
+  ></ui-ticket-card>
+</div>

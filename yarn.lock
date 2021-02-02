@@ -1144,6 +1144,27 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
 
+"@ngneat/hot-toast@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@ngneat/hot-toast/-/hot-toast-1.0.1.tgz#1844f1afbde618cd249365e8d0d85f79c53b6732"
+  integrity sha512-oNfWRiUWmwpmrYjrAqtUIlGZjCJ8D0pncq5j30H4KFepjIr6OIXv4BWdJ+M5Vhw/lD9AweTNaOmHBc8S5dwqvA==
+  dependencies:
+    tslib "^2.0.0"
+
+"@ngneat/overview@^1.0.0-beta.7":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@ngneat/overview/-/overview-1.0.0.tgz#554710ddf129aafd47d6e17ccca91e55736dd1d5"
+  integrity sha512-rWR1hwMMrHCwaLNkyRCkRUkh3gB3bN/5+EBfq5Y3I4e4OYvqNdGwF1X0x62iWE5Aof96dxKnyX4UdDnje49hiw==
+  dependencies:
+    tslib "^2.0.0"
+
+"@ngrx/effects@^10.1.2":
+  version "10.1.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-10.1.2.tgz#f1c9daa2e3e13aeb6af272cb52f6dff73d364d68"
+  integrity sha512-6pX6FEzLlqdbtFVMbCvscsaL6QC/L95e72JKj76Xz+8V77UTlpVsxWyMo7YU9pM4EXNpBGmOpMs2xKjfBfK05Q==
+  dependencies:
+    tslib "^2.0.0"
+
 "@ngrx/store@^10.1.2":
   version "10.1.2"
   resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-10.1.2.tgz#a41aee81ea7b7e4a9f927be560e6024830211efb"

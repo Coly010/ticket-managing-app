@@ -1,8 +1,7 @@
-<h2>Tickets</h2>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Ticket Managing System</span>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-<ul>
-  <li *ngFor="let t of tickets|async">
-    Ticket: {{t.id}}, {{t.description}}
-  </li>
-</ul>
-
+<feat-tickets-shell></feat-tickets-shell>
