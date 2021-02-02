@@ -3,5 +3,6 @@
     *ngFor="let ticket of tickets$ | async; trackBy: trackByTicketId"
     [ticket]="ticket"
     [user]="{}"
+    (click)="openCard(ticket.id)"
   ></ui-ticket-card>
 </div>

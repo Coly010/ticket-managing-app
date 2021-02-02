@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppComponent } from './app.component';
 import { FeatTicketsModule } from './tickets';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { RouterModule } from '@angular/router';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   return function (state, action) {
@@ -27,6 +28,7 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     StoreModule.forRoot({}, { metaReducers }),
     EffectsModule.forRoot(),
     BrowserAnimationsModule,
+    RouterModule.forRoot([]),
     MatToolbarModule,
     FeatTicketsModule,
     HotToastModule.forRoot(),

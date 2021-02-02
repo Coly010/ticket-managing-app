@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatDividerModule } from '@angular/material/divider';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { UiModule } from '../ui';
-import { ShellComponent } from './+shell';
-import { TicketListModule } from './ticket-list';
 import {
   TicketEffects,
   ticketFeatureKey,
   ticketReducers,
 } from '../data-access';
-import { EffectsModule } from '@ngrx/effects';
+
+import { ShellComponent } from './+shell';
+import { TicketListModule } from './ticket-list';
+import { FeatTicketsRoutingModule } from './feat-tickets-routing.module';
 
 @NgModule({
   declarations: [ShellComponent],
@@ -18,7 +21,9 @@ import { EffectsModule } from '@ngrx/effects';
     CommonModule,
     StoreModule.forFeature(ticketFeatureKey, ticketReducers),
     EffectsModule.forFeature([TicketEffects]),
+    FeatTicketsRoutingModule,
     UiModule,
+    MatDividerModule,
     TicketListModule,
   ],
   exports: [ShellComponent],

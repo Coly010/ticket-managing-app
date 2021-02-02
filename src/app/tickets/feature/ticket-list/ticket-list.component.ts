@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { BackendService } from 'src/app/backend.service';
@@ -20,12 +21,17 @@ export class TicketListComponent implements OnInit {
 
   constructor(
     private store: Store<TicketState>,
-    private backendService: BackendService
+    private backendService: BackendService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.store.dispatch(fetchTicketListOnInit());
     this.users$ = this.backendService.users();
+  }
+
+  openCard(ticketId: number) {
+    this.router.navigateByUrl(`/ticket/${ticketId}`);
   }
 
   trackByTicketId(index: number, ticket: Ticket) {
