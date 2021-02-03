@@ -1,7 +1,13 @@
 <div class="ticket-shell">
-  <feat-ticket-list></feat-ticket-list>
-  <mat-divider [vertical]="true"></mat-divider>
-  <div class="ticket-detail-container">
-    <router-outlet></router-outlet>
-  </div>
+  <feat-ticket-list
+    [tickets]="tickets$ | async"
+    [users]="users$ | async | arrayToMap"
+    (openCard)="openCardDetails($event)"
+  ></feat-ticket-list>
+  <ng-container *ngIf="isDetailsPaneOpen">
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="ticket-detail-container">
+      <router-outlet></router-outlet>
+    </div>
+  </ng-container>
 </div>

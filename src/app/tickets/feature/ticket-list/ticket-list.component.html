@@ -1,8 +1,8 @@
 <div class="ticket-grid">
   <ui-ticket-card
-    *ngFor="let ticket of tickets$ | async; trackBy: trackByTicketId"
+    *ngFor="let ticket of tickets; trackBy: trackByTicketId"
     [ticket]="ticket"
-    [user]="{}"
-    (click)="openCard(ticket.id)"
+    [user]="ticket.assigneeId ? users[ticket.assigneeId] : {}"
+    (click)="clickOpenCard(ticket.id)"
   ></ui-ticket-card>
 </div>

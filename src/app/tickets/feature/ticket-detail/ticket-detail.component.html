@@ -1,1 +1,27 @@
-<p>ticket-detail works!</p>
+<div class="container">
+  <ng-container *ngIf="ticket$ | async as ticket">
+    <h1>{{ ticket.description }}</h1>
+    <mat-divider></mat-divider>
+    <div class="actions">
+      <mat-form-field>
+        <mat-label>Assigned To</mat-label>
+        <mat-select
+          (selectionChange)="setAssignee($event, ticket)"
+          [value]="ticket.assigneeId"
+        >
+          <mat-option [value]="undefined">Unassign</mat-option>
+          <mat-option *ngFor="let user of users$ | async" [value]="user.id">{{
+            user.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="completed">
+        <mat-checkbox
+          (change)="setCompleted(ticket)"
+          [checked]="ticket.completed"
+          >Completed</mat-checkbox
+        >
+      </div>
+    </div>
+  </ng-container>
+</div>

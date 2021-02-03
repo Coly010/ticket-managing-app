@@ -1,37 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-
-import { BackendService } from 'src/app/backend.service';
 import {
-  fetchTicketListOnInit,
-  selectTickets,
-  Ticket,
-  TicketState,
-} from 'src/app/tickets/data-access';
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+
+import { Ticket } from 'src/app/tickets/data-access';
+import { User } from 'src/app/users/data-access';
 
 @Component({
   selector: 'feat-ticket-list',
   templateUrl: './ticket-list.component.html',
   styleUrls: ['./ticket-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TicketListComponent implements OnInit {
-  tickets$ = this.store.select(selectTickets);
-  users$: any;
+export class TicketListComponent {
+  @Input() tickets: Ticket[];
+  @Input() users: { [key: number]: User };
+  @Output() openCard = new EventEmitter<{ ticketId: number }>();
 
-  constructor(
-    private store: Store<TicketState>,
-    private backendService: BackendService,
-    private router: Router
-  ) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.store.dispatch(fetchTicketListOnInit());
-    this.users$ = this.backendService.users();
-  }
-
-  openCard(ticketId: number) {
-    this.router.navigateByUrl(`/ticket/${ticketId}`);
+  clickOpenCard(ticketId: number) {
+    this.openCard.emit({ ticketId });
   }
 
   trackByTicketId(index: number, ticket: Ticket) {

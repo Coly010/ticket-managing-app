@@ -8,4 +8,6 @@ ui-ticket-card {
   min-width: calc(25% - 8px);
   max-width: calc(50% - 8px);
   margin: 4px;
+
+  cursor: pointer;
 }

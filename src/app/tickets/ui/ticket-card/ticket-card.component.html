@@ -1,6 +1,8 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>{{ ticket.description }}</mat-card-title>
+    <mat-card-title [class.completed]="ticket.completed">{{
+      ticket.description
+    }}</mat-card-title>
     <mat-card-subtitle>{{
       user.name ? user.name : 'Unassigned'
     }}</mat-card-subtitle>

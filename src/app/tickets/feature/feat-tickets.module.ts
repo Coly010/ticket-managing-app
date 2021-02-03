@@ -14,9 +14,10 @@ import {
 import { ShellComponent } from './+shell';
 import { TicketListModule } from './ticket-list';
 import { FeatTicketsRoutingModule } from './feat-tickets-routing.module';
+import { ArrayToMapPipe } from './+shell/array-to-map.pipe';
 
 @NgModule({
-  declarations: [ShellComponent],
+  declarations: [ShellComponent, ArrayToMapPipe],
   imports: [
     CommonModule,
     StoreModule.forFeature(ticketFeatureKey, ticketReducers),
