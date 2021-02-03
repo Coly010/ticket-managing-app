@@ -1,3 +1,8 @@
+.filter-bar {
+  width: 100%;
+  padding: 8px;
+}
+
 .ticket-grid {
   display: flex;
   justify-content: start;

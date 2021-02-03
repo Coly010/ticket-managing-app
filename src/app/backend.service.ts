@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { delay, map, tap } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 
 import { Ticket } from 'src/app/tickets/data-access';
 import { User } from 'src/app/users/data-access';

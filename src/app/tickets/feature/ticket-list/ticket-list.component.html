@@ -1,6 +1,27 @@
+<div class="filter-bar">
+  <strong>Filter Tickets By: </strong>
+  <!-- Mat Chips using selected = true as work around otherwise color will not be applied to chips-->
+  <mat-chip-list aria-label="Filter Ticket List Selection">
+    <mat-chip
+      [color]="activeFilters | chipFilterActive: 'completed'"
+      (click)="updateActiveFilters('completed')"
+      [selected]="true"
+      >Completed</mat-chip
+    >
+    <mat-chip
+      [color]="activeFilters | chipFilterActive: 'unassigned'"
+      (click)="updateActiveFilters('unassigned')"
+      [selected]="true"
+      >Unassigned</mat-chip
+    >
+  </mat-chip-list>
+</div>
 <div class="ticket-grid">
   <ui-ticket-card
-    *ngFor="let ticket of tickets; trackBy: trackByTicketId"
+    *ngFor="
+      let ticket of tickets | filterTickets: activeFilters;
+      trackBy: trackByTicketId
+    "
     [ticket]="ticket"
     [user]="ticket.assigneeId ? users[ticket.assigneeId] : {}"
     (click)="clickOpenCard(ticket.id)"
