@@ -11,11 +11,11 @@ import {
   ticketReducers,
 } from '../data-access';
 
-import { ShellComponent } from './+shell';
+import { ShellComponent, ArrayToMapPipe } from './+shell';
 import { TicketListModule } from './ticket-list';
-import { FeatTicketsRoutingModule } from './feat-tickets-routing.module';
-import { ArrayToMapPipe } from './+shell/array-to-map.pipe';
 import { AddNewModule } from './add-new';
+
+import { FeatTicketsRoutingModule } from './feat-tickets-routing.module';
 
 @NgModule({
   declarations: [ShellComponent, ArrayToMapPipe],

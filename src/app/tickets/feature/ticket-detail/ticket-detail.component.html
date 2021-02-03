@@ -1,6 +1,6 @@
 <div class="container">
   <ng-container *ngIf="ticket$ | async as ticket; else noTicketFound">
-    <h1>{{ ticket.description }}</h1>
+    <h1 data-testid="ticket-details-description">{{ ticket.description }}</h1>
     <mat-divider></mat-divider>
     <div class="actions">
       <feat-user-select
