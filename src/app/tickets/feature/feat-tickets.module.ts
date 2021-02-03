@@ -15,6 +15,7 @@ import { ShellComponent } from './+shell';
 import { TicketListModule } from './ticket-list';
 import { FeatTicketsRoutingModule } from './feat-tickets-routing.module';
 import { ArrayToMapPipe } from './+shell/array-to-map.pipe';
+import { AddNewModule } from './add-new';
 
 @NgModule({
   declarations: [ShellComponent, ArrayToMapPipe],
@@ -26,6 +27,7 @@ import { ArrayToMapPipe } from './+shell/array-to-map.pipe';
     UiModule,
     MatDividerModule,
     TicketListModule,
+    AddNewModule,
   ],
   exports: [ShellComponent],
 })

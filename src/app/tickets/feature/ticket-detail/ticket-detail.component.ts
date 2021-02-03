@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
 import { switchMap, withLatestFrom } from 'rxjs/operators';
@@ -32,17 +32,22 @@ export class TicketDetailComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private store: Store<TicketState>,
     private backendService: BackendService
   ) {}
 
   ngOnInit() {}
 
-  setAssignee({ value }: MatSelectChange, ticket: Ticket) {
-    this.store.dispatch(userChangedAssignee({ ticket, assigneeId: value }));
+  setAssignee({ userId }: { userId: number }, ticket: Ticket) {
+    this.store.dispatch(userChangedAssignee({ ticket, assigneeId: userId }));
   }
 
   setCompleted(ticket: Ticket) {
     this.store.dispatch(userClickedCompleteTicket({ ticket }));
+  }
+
+  closePane() {
+    this.router.navigateByUrl('/');
   }
 }

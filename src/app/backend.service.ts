@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+import { delay, map, tap } from 'rxjs/operators';
 
 import { Ticket } from 'src/app/tickets/data-access';
 import { User } from 'src/app/users/data-access';
@@ -70,20 +70,29 @@ export class BackendService {
 
     return of(newTicket).pipe(
       delay(randomDelay()),
-      tap((ticket: Ticket) => this.storedTickets.push(ticket))
+      tap(
+        (ticket: Ticket) =>
+          (this.storedTickets = [...this.storedTickets, ticket])
+      )
     );
   }
 
   assign(ticketId: number, userId: number) {
+    const isUserUnassigningTicket = userId === undefined;
+
     const foundTicket = this.findTicketById(+ticketId);
     const user = this.findUserById(+userId);
 
-    if (foundTicket && user) {
-      return of(foundTicket).pipe(
-        delay(randomDelay()),
-        tap((ticket: Ticket) => {
-          ticket.assigneeId = +userId;
-        })
+    const canReassign =
+      (foundTicket && isUserUnassigningTicket) || (foundTicket && user);
+
+    if (canReassign) {
+      this.storedTickets = this.storedTickets.map((t) =>
+        t.id === ticketId ? { ...t, assigneeId: userId } : t
+      );
+
+      return of({ ...foundTicket, assigneeId: userId }).pipe(
+        delay(randomDelay())
       );
     }
 
@@ -93,12 +102,10 @@ export class BackendService {
   complete(ticketId: number, completed: boolean) {
     const foundTicket = this.findTicketById(+ticketId);
     if (foundTicket) {
-      return of(foundTicket).pipe(
-        delay(randomDelay()),
-        tap((ticket: Ticket) => {
-          ticket.completed = completed;
-        })
+      this.storedTickets = this.storedTickets.map((t) =>
+        t.id === ticketId ? { ...t, completed } : t
       );
+      return of({ ...foundTicket, completed }).pipe(delay(randomDelay()));
     }
 
     return throwError(new Error('ticket not found'));

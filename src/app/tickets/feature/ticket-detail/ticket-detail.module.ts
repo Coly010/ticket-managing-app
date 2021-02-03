@@ -5,9 +5,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
+import { UserSelectModule } from 'src/app/users/feature';
 import { TicketDetailComponent } from './ticket-detail.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [{ path: '', component: TicketDetailComponent }];
 
@@ -20,6 +22,9 @@ const routes: Routes = [{ path: '', component: TicketDetailComponent }];
     MatFormFieldModule,
     MatSelectModule,
     MatCheckboxModule,
+    UserSelectModule,
+    MatIconModule,
+    MatButtonModule,
   ],
 })
 export class TicketDetailModule {}

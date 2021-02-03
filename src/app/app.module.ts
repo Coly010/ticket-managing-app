@@ -1,14 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { HotToastModule } from '@ngneat/hot-toast';
 
 import { AppComponent } from './app.component';
 import { FeatTicketsModule } from './tickets';
-import { HotToastModule } from '@ngneat/hot-toast';
-import { RouterModule } from '@angular/router';
+import { UserFeatureModule } from './users/feature';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   return function (state, action) {
@@ -29,9 +30,10 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     EffectsModule.forRoot(),
     BrowserAnimationsModule,
     RouterModule.forRoot([]),
+    HotToastModule.forRoot(),
     MatToolbarModule,
     FeatTicketsModule,
-    HotToastModule.forRoot(),
+    UserFeatureModule,
   ],
   bootstrap: [AppComponent],
 })

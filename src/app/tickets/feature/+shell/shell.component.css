@@ -1,6 +1,15 @@
+.shell {
+  min-height: calc(100vh - 64px);
+  height: calc(100vh - 64px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .ticket-shell {
   display: flex;
-  min-height: calc(100vh - 64px);
+  flex: 1;
+  border-top: 1px solid grey;
 }
 
 feat-ticket-list {
@@ -10,4 +19,16 @@ feat-ticket-list {
 .ticket-detail-container {
   min-width: 33vw;
   max-width: 33vw;
+}
+
+.add-ticket {
+  margin: 8px;
+  margin-bottom: 16px;
+  width: 75%;
+  align-self: center;
+}
+
+.add-ticket h3 {
+  text-align: center;
+  margin-bottom: 4px;
 }

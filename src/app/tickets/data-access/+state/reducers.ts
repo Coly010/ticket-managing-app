@@ -16,22 +16,29 @@ export const ticketReducers = createReducer(
   on(TicketActions.ticketsFetchedSuccessfully, (state, { tickets }) => ({
     tickets,
   })),
-  on(TicketActions.userChangedAssignee, (state, { ticket, assigneeId }) => {
+  on(TicketActions.assigneeChangedSuccessfully, (state, { ticket }) => {
     const tickets = state.tickets.map((t) =>
-      t.id === ticket.id ? { ...t, assigneeId } : t
+      t.id === ticket.id ? { ...ticket } : t
+    );
+
+    return {
+      ...state,
+      tickets: [...tickets],
+    };
+  }),
+  on(TicketActions.ticketCompletedSuccessfully, (state, { ticket }) => {
+    const tickets = state.tickets.map((t) =>
+      t.id === ticket.id ? { ...ticket } : t
     );
 
     return {
       tickets: [...tickets],
     };
   }),
-  on(TicketActions.userClickedCompleteTicket, (state, { ticket }) => {
-    const tickets = state.tickets.map((t) =>
-      t.id === ticket.id ? { ...t, completed: !t.completed } : t
-    );
-
+  on(TicketActions.ticketAddedSuccessfully, (state, { ticket }) => {
     return {
-      tickets: [...tickets],
+      ...state,
+      tickets: [...state.tickets, ticket],
     };
   })
 );

@@ -15,7 +15,27 @@ export const userClickedCompleteTicket = createAction(
   props<{ ticket: Ticket }>()
 );
 
+export const ticketCompletedSuccessfully = createAction(
+  '[TICKET EFFECTS] Ticket completed successfully',
+  props<{ ticket: Ticket }>()
+);
+
 export const userChangedAssignee = createAction(
   '[TICKET DETAILS] User changed ticket assignee',
   props<{ ticket: Ticket; assigneeId: number }>()
+);
+
+export const assigneeChangedSuccessfully = createAction(
+  '[TICKET EFFETCS] Successfully changed ticket assignee',
+  props<{ ticket: Ticket }>()
+);
+
+export const addNewTicket = createAction(
+  '[TICKET] User added new ticket',
+  props<{ ticket: Ticket }>()
+);
+
+export const ticketAddedSuccessfully = createAction(
+  '[TICKET EFFECTS] Ticket added successfully',
+  props<{ ticket: Ticket }>()
 );
