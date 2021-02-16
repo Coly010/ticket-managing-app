@@ -1,10 +1,22 @@
 <div class="form-group">
   <mat-form-field>
     <mat-label>Description</mat-label>
-    <input matInput [(ngModel)]="ticketDescription" type="text" />
+    <input
+      matInput
+      [(ngModel)]="ticketDescription"
+      (ngModelChange)="userUpdatedForm()"
+      type="text"
+    />
   </mat-form-field>
   <feat-user-select (selectUser)="setAssignedUser($event)"></feat-user-select>
   <div>
-    <button mat-flat-button color="primary" (click)="addTicket()">Add</button>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="!(isValid$ | async)"
+      (click)="addTicket()"
+    >
+      Add
+    </button>
   </div>
 </div>

@@ -8,19 +8,29 @@ import { TicketFilter } from '../+models';
   name: 'filterTickets',
 })
 export class FilterPipe implements PipeTransform {
-  transform(tickets: Ticket[], filters: TicketFilter[]): Ticket[] {
+  transform(
+    tickets: Ticket[],
+    filters: TicketFilter[],
+    searchValue: string
+  ): Ticket[] {
+    const matchingTickets = searchValue
+      ? tickets.filter((t) =>
+          t.description.toLowerCase().includes(searchValue.toLowerCase())
+        )
+      : tickets;
+
     if (filters.includes('completed') && filters.includes('unassigned')) {
-      return tickets.filter((t) => t.completed && !t.assigneeId);
+      return matchingTickets.filter((t) => t.completed && !t.assigneeId);
     }
 
     if (filters.includes('unassigned')) {
-      return tickets.filter((t) => !t.assigneeId);
+      return matchingTickets.filter((t) => !t.assigneeId);
     }
 
     if (filters.includes('completed')) {
-      return tickets.filter((t) => t.completed);
+      return matchingTickets.filter((t) => t.completed);
     }
 
-    return tickets;
+    return matchingTickets;
   }
 }

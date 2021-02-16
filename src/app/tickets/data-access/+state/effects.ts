@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { merge, of } from 'rxjs';
+import { map, switchMap, mergeMap, catchError } from 'rxjs/operators';
 
 import { BackendService } from 'src/app/backend.service';
 
@@ -35,7 +35,7 @@ export class TicketEffects {
   addNewTicket$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TicketActions.addNewTicket),
-      switchMap(({ ticket }) =>
+      mergeMap(({ ticket }) =>
         this.backendService.newTicket(ticket).pipe(
           switchMap((newTicket) =>
             ticket.assigneeId
@@ -58,7 +58,7 @@ export class TicketEffects {
   changeTicketAssignee$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TicketActions.userChangedAssignee),
-      switchMap(({ ticket, assigneeId }) =>
+      mergeMap(({ ticket, assigneeId }) =>
         this.backendService.assign(ticket.id, assigneeId).pipe(
           this.toast.observe({
             loading: 'Updating...',
@@ -74,16 +74,21 @@ export class TicketEffects {
   completeTicket$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TicketActions.userClickedCompleteTicket),
-      switchMap(({ ticket }) =>
+      mergeMap(({ ticket }) =>
         this.backendService.complete(ticket.id, !ticket.completed).pipe(
           this.toast.observe({
             loading: 'Updating...',
             success: 'Ticket updated!',
             error: 'An error occurred, please try again...',
-          })
+          }),
+          map((ticket) =>
+            TicketActions.ticketCompletedSuccessfully({ ticket })
+          ),
+          catchError((error) =>
+            of(TicketActions.ticketCompletionFailedAtDAL({ ticket }))
+          )
         )
-      ),
-      map((ticket) => TicketActions.ticketCompletedSuccessfully({ ticket }))
+      )
     )
   );
 }

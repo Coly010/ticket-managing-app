@@ -40,5 +40,29 @@ export const ticketReducers = createReducer(
       ...state,
       tickets: [...state.tickets, ticket],
     };
+  }),
+  on(TicketActions.userClickedCompleteTicket, (state, { ticket }) => {
+    return {
+      ...state,
+      tickets: [
+        ...state.tickets.map((t) =>
+          t.id === ticket.id
+            ? { ...ticket, completed: !ticket.completed }
+            : { ...t }
+        ),
+      ],
+    };
+  }),
+  on(TicketActions.ticketCompletionFailedAtDAL, (state, { ticket }) => {
+    return {
+      ...state,
+      tickets: [
+        ...state.tickets.map((t) =>
+          t.id === ticket.id
+            ? { ...ticket, completed: ticket.completed }
+            : { ...t }
+        ),
+      ],
+    };
   })
 );

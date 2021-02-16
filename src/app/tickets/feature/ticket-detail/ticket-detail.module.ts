@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { UserSelectModule } from 'src/app/users/feature';
 import { TicketDetailComponent } from './ticket-detail.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [{ path: '', component: TicketDetailComponent }];
 
@@ -18,6 +19,7 @@ const routes: Routes = [{ path: '', component: TicketDetailComponent }];
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FormsModule,
     MatDividerModule,
     MatFormFieldModule,
     MatSelectModule,

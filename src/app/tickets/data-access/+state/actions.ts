@@ -39,3 +39,8 @@ export const ticketAddedSuccessfully = createAction(
   '[TICKET EFFECTS] Ticket added successfully',
   props<{ ticket: Ticket }>()
 );
+
+export const ticketCompletionFailedAtDAL = createAction(
+  '[TICKET EFFECTS] Ticket failed to complete at DAL',
+  props<{ ticket: Ticket }>()
+);

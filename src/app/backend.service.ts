@@ -100,13 +100,13 @@ export class BackendService {
   }
 
   complete(ticketId: number, completed: boolean) {
-    const foundTicket = this.findTicketById(+ticketId);
-    if (foundTicket) {
-      this.storedTickets = this.storedTickets.map((t) =>
-        t.id === ticketId ? { ...t, completed } : t
-      );
-      return of({ ...foundTicket, completed }).pipe(delay(randomDelay()));
-    }
+    // const foundTicket = this.findTicketById(+ticketId);
+    // if (foundTicket) {
+    //   this.storedTickets = this.storedTickets.map((t) =>
+    //     t.id === ticketId ? { ...t, completed } : t
+    //   );
+    //   return of({ ...foundTicket, completed }).pipe(delay(randomDelay()));
+    // }
 
     return throwError(new Error('ticket not found'));
   }

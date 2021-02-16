@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 
 import { selectUsersAsArray } from 'src/app/users/data-access';
 import {
@@ -21,7 +21,10 @@ import {
 export class TicketDetailComponent {
   ticket$ = this.activatedRoute.params.pipe(
     switchMap(({ id }) =>
-      this.store.select(selectTicketById, { ticketId: Number(id) })
+      this.store.select(selectTicketById, { ticketId: Number(id) }).pipe(
+        tap(console.log),
+        tap(() => this.cdRef.detectChanges())
+      )
     )
   );
 
@@ -30,8 +33,10 @@ export class TicketDetailComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private cdRef: ChangeDetectorRef
   ) {}
+
   setAssignee({ userId }: { userId: number }, ticket: Ticket) {
     this.store.dispatch(userChangedAssignee({ ticket, assigneeId: userId }));
   }
